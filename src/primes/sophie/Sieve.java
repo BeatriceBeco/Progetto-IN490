@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.Random;
 
 public class Sieve extends primes.Sieve<Token> {
+	BigInteger two = new BigInteger("2")
 	private BigInteger sophie;
 	private int offset;
 	private int iterations;
@@ -86,7 +87,7 @@ public class Sieve extends primes.Sieve<Token> {
 			System.out.println("Sieve: founded prime "+this.sophie);
 			System.out.println(" ");
 			tok.setPriming(true);
-		} while(!solovayStrassen(this.sophie.multiply(new BigInteger("2")).add(BigInteger.ONE), iterations));
+		} while(!solovayStrassen(this.sophie.multiply(two).add(BigInteger.ONE), iterations));
 
 	}
 
@@ -102,7 +103,7 @@ public class Sieve extends primes.Sieve<Token> {
 		for(i=0; i<iterations; i++) {
 			a = pickRand(candidate);
 			l = legendre(a,candidate);
-			a = modularExponentiation(a, candidate.subtract(BigInteger.ONE).divide(new BigInteger("2")), candidate);
+			a = modularExponentiation(a, candidate.subtract(BigInteger.ONE).divide(two), candidate);
 			//this is necessary to deal with results cong -1 mod candidate
 			if (a.intValue() != 1 && a.intValue() != 0)
 				a = a.subtract(candidate);
@@ -139,8 +140,8 @@ public class Sieve extends primes.Sieve<Token> {
 	
 		while(p.compareTo(BigInteger.ZERO) != 0 && p.compareTo(BigInteger.ONE) != 0) {
 			
-			if(p.mod(new BigInteger("2")).compareTo(BigInteger.ZERO) == 0) { //If 2|p, do p/2
-				p = p.divide(new BigInteger("2")) ;
+			if(p.mod(two).compareTo(BigInteger.ZERO) == 0) { //If 2|p, do p/2
+				p = p.divide(two) ;
 				if(q.mod(new BigInteger("8")).compareTo(new BigInteger("3")) == 0 || q.mod(new BigInteger("8")).compareTo(new BigInteger("5")) == 0) 
 					positivity = !positivity ; //Sign unchanged if q = +1,-1 (mod 8)
 			}else{

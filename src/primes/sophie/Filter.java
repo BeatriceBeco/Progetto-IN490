@@ -5,6 +5,7 @@ import primes.Item;
 import primes.sophie.Token;
 
 public class Filter extends primes.Filter<Token> {
+	BigInteger two = new BigInteger("2");
 
 //constructors
 	public Filter(Item<Token> tail, BigInteger p) {
@@ -36,7 +37,7 @@ public class Filter extends primes.Filter<Token> {
 	}
 
 	private boolean modularRestriction(BigInteger p) {
-		BigInteger tmp = p.subtract(BigInteger.ONE).divide(new BigInteger("2"));
+		BigInteger tmp = p.subtract(BigInteger.ONE).divide(two);
 		return tmp.mod(super.value()).compareTo(BigInteger.ZERO) == 0;
 	}
 
